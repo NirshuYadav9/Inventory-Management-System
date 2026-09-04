@@ -1,0 +1,38 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Delete {{ type }}
+{% endblock %}
+
+{% block content %}
+
+<h1>Delete {{ type }}</h1>
+
+<div class="card">
+
+    <p>
+        Are you sure you want to delete:
+        <strong>{{ object }}</strong>?
+    </p>
+
+    <br>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <button type="submit"
+                class="btn btn-danger">
+            Yes, Delete
+        </button>
+
+        <a href="{% url back_url %}"
+           class="btn">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

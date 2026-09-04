@@ -1,0 +1,74 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Stock Transactions
+{% endblock %}
+
+{% block content %}
+
+<h1>Stock Transactions</h1>
+
+<a href="{% url 'stock_transaction_create' %}"
+   class="btn btn-success">
+    + New Transaction
+</a>
+
+<table>
+
+    <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>Date</th>
+        <th>Reference</th>
+        <th>Remarks</th>
+    </tr>
+
+    {% for transaction in transactions %}
+
+    <tr>
+
+        <td>
+            {{ transaction.transaction_id }}
+        </td>
+
+        <td>
+            {{ transaction.product.product_name }}
+        </td>
+
+        <td>
+            {{ transaction.transaction_type }}
+        </td>
+
+        <td>
+            {{ transaction.quantity }}
+        </td>
+
+        <td>
+            {{ transaction.transaction_date }}
+        </td>
+
+        <td>
+            {{ transaction.reference }}
+        </td>
+
+        <td>
+            {{ transaction.remarks }}
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="7">
+            No stock transactions found.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

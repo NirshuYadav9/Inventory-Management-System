@@ -1,0 +1,64 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Purchase Orders
+{% endblock %}
+
+{% block content %}
+
+<h1>Purchase Orders</h1>
+
+<a href="{% url 'purchase_order_create' %}"
+   class="btn btn-success">
+    + Create Purchase Order
+</a>
+
+<table>
+
+    <tr>
+        <th>Order ID</th>
+        <th>Supplier</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Total Amount</th>
+    </tr>
+
+    {% for order in orders %}
+
+    <tr>
+
+        <td>
+            PO-{{ order.order_id }}
+        </td>
+
+        <td>
+            {{ order.supplier.supplier_name }}
+        </td>
+
+        <td>
+            {{ order.order_date }}
+        </td>
+
+        <td>
+            {{ order.status }}
+        </td>
+
+        <td>
+            {{ order.total_amount }}
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="5">
+            No purchase orders found.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Stock Movement Report
+{% endblock %}
+
+{% block content %}
+
+<h1>Stock Movement Report</h1>
+
+<p>
+    Product + Supplier + Stock Transactions
+</p>
+
+<table>
+
+    <tr>
+        <th>Product</th>
+        <th>Supplier</th>
+        <th>Transaction Type</th>
+        <th>Quantity</th>
+        <th>Date</th>
+        <th>Reference</th>
+        <th>Remarks</th>
+    </tr>
+
+    {% for transaction in transactions %}
+
+    <tr>
+
+        <td>
+            {{ transaction.product.product_name }}
+        </td>
+
+        <td>
+            {{ transaction.product.supplier.supplier_name }}
+        </td>
+
+        <td>
+            {{ transaction.transaction_type }}
+        </td>
+
+        <td>
+            {{ transaction.quantity }}
+        </td>
+
+        <td>
+            {{ transaction.transaction_date }}
+        </td>
+
+        <td>
+            {{ transaction.reference }}
+        </td>
+
+        <td>
+            {{ transaction.remarks }}
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="7">
+            No stock movement available.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

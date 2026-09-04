@@ -1,0 +1,66 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Orders by Supplier
+{% endblock %}
+
+{% block content %}
+
+<h1>Orders by Supplier</h1>
+
+<p>
+    Supplier:
+    <strong>{{ supplier.supplier_name }}</strong>
+</p>
+
+<table>
+
+    <tr>
+        <th>Order ID</th>
+        <th>Order Date</th>
+        <th>Status</th>
+        <th>Total Amount</th>
+    </tr>
+
+    {% for order in orders %}
+
+    <tr>
+
+        <td>
+            PO-{{ order.order_id }}
+        </td>
+
+        <td>
+            {{ order.order_date }}
+        </td>
+
+        <td>
+            {{ order.status }}
+        </td>
+
+        <td>
+            {{ order.total_amount }}
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="4">
+            No orders found.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<br>
+
+<a href="{% url 'supplier_list' %}"
+   class="btn">
+    Back to Suppliers
+</a>
+
+{% endblock %}

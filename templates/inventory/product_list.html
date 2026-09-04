@@ -1,0 +1,115 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block content %}
+
+<h1>Products</h1>
+
+<a href="{% url 'product_create' %}"
+   class="btn btn-success">
+    + Add Product
+</a>
+
+<a href="{% url 'low_stock' %}"
+   class="btn btn-danger">
+    Low Stock
+</a>
+
+<table>
+
+    <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Reorder Level</th>
+        <th>Status</th>
+        <th>Last Checked</th>
+        <th>Supplier</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for product in products %}
+
+    <tr>
+
+        <td>{{ product.product_id }}</td>
+
+        <td>{{ product.product_name }}</td>
+
+        <td>{{ product.category }}</td>
+
+        <td>{{ product.unit_price }}</td>
+
+        <td>
+            {% if product.is_low_stock %}
+                <span class="low-stock">
+                    {{ product.quantity_in_stock }}
+                </span>
+            {% else %}
+                {{ product.quantity_in_stock }}
+            {% endif %}
+        </td>
+
+        <td>{{ product.reorder_level }}</td>
+
+        <td>
+
+            {% if product.stock_status == "LOW STOCK" %}
+
+            <span class="low-stock">
+                LOW STOCK
+            </span>
+
+            {% else %}
+
+                NORMAL
+
+            {% endif %}
+
+        </td>
+
+        <td>
+            {{ product.last_checked|date:"Y-m-d H:i:s" }}
+        </td>
+
+        <td>{{ product.supplier.supplier_name }}</td>
+
+        <td>
+
+            <a href="{% url 'product_update' product.product_id %}"
+               class="btn">
+                Edit
+            </a>
+
+            <a href="{% url 'product_delete' product.product_id %}"
+               class="btn btn-danger">
+                Delete
+            </a>
+
+            <a href="{% url 'transactions_by_product' product.product_id %}"
+                class="btn">
+                Stock History
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="10">
+            No products found.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

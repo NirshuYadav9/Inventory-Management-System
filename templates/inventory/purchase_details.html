@@ -1,0 +1,73 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Purchase Details Report
+{% endblock %}
+
+{% block content %}
+
+<h1>Purchase Details Report</h1>
+
+<p>
+    Supplier → Purchase Order → Order Item → Product
+</p>
+
+<table>
+
+    <tr>
+        <th>Order ID</th>
+        <th>Supplier</th>
+        <th>Order Date</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Subtotal</th>
+    </tr>
+
+    {% for item in items %}
+
+    <tr>
+
+        <td>
+            PO-{{ item.order.order_id }}
+        </td>
+
+        <td>
+            {{ item.order.supplier.supplier_name }}
+        </td>
+
+        <td>
+            {{ item.order.order_date }}
+        </td>
+
+        <td>
+            {{ item.product.product_name }}
+        </td>
+
+        <td>
+            {{ item.quantity }}
+        </td>
+
+        <td>
+            {{ item.unit_price }}
+        </td>
+
+        <td>
+            {{ item.subtotal }}
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="7">
+            No purchase details available.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

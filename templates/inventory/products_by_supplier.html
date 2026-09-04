@@ -1,0 +1,64 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Products by Supplier
+{% endblock %}
+
+{% block content %}
+
+<h1>Products by Supplier</h1>
+
+<p>
+    Supplier:
+    <strong>{{ supplier.supplier_name }}</strong>
+</p>
+
+<table>
+
+    <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Unit Price</th>
+        <th>Stock</th>
+        <th>Reorder Level</th>
+    </tr>
+
+    {% for product in products %}
+
+    <tr>
+
+        <td>{{ product.product_id }}</td>
+
+        <td>{{ product.product_name }}</td>
+
+        <td>{{ product.category }}</td>
+
+        <td>{{ product.unit_price }}</td>
+
+        <td>{{ product.quantity_in_stock }}</td>
+
+        <td>{{ product.reorder_level }}</td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="6">
+            No products found for this supplier.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<br>
+
+<a href="{% url 'supplier_list' %}"
+   class="btn">
+    Back to Suppliers
+</a>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Stock History
+{% endblock %}
+
+{% block content %}
+
+<h1>Product Stock History</h1>
+
+<p>
+    Product:
+    <strong>{{ product.product_name }}</strong>
+</p>
+
+<p>
+    Current Stock:
+    <strong>{{ product.quantity_in_stock }}</strong>
+</p>
+
+<table>
+
+    <tr>
+        <th>Transaction ID</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>Date</th>
+        <th>Reference</th>
+        <th>Remarks</th>
+    </tr>
+
+    {% for transaction in transactions %}
+
+    <tr>
+
+        <td>
+            {{ transaction.transaction_id }}
+        </td>
+
+        <td>
+            {{ transaction.transaction_type }}
+        </td>
+
+        <td>
+            {{ transaction.quantity }}
+        </td>
+
+        <td>
+            {{ transaction.transaction_date }}
+        </td>
+
+        <td>
+            {{ transaction.reference }}
+        </td>
+
+        <td>
+            {{ transaction.remarks }}
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="6">
+            No stock transactions found.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<br>
+
+<a href="{% url 'product_list' %}"
+   class="btn">
+    Back to Products
+</a>
+
+{% endblock %}

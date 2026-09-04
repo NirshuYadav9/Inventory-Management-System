@@ -1,0 +1,117 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1>Inventory Dashboard</h1>
+
+<p>
+    Welcome to the Inventory Management System.
+</p>
+
+<div class="dashboard-grid">
+
+    <div class="card">
+        <h3>Total Suppliers</h3>
+        <div class="number">
+            {{ supplier_count }}
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Total Products</h3>
+        <div class="number">
+            {{ product_count }}
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Purchase Orders</h3>
+        <div class="number">
+            {{ order_count }}
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Low Stock Items</h3>
+        <div class="number">
+            {{ low_stock_count }}
+        </div>
+
+        <a href="{% url 'low_stock' %}"
+           class="btn btn-danger">
+            View
+        </a>
+    </div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+    <h2>Quick Actions</h2>
+
+    <br>
+
+    <a href="{% url 'supplier_create' %}"
+       class="btn">
+        Add Supplier
+    </a>
+
+    <a href="{% url 'product_create' %}"
+       class="btn">
+        Add Product
+    </a>
+
+    <a href="{% url 'purchase_order_create' %}"
+       class="btn">
+        New Purchase Order
+    </a>
+
+    <a href="{% url 'stock_transaction_create' %}"
+       class="btn btn-success">
+        Stock Transaction
+    </a>
+
+    <form method="post"
+        action="{% url 'run_inventory_check' %}"
+        style="display: inline; background: none; padding: 0;">
+
+        {% csrf_token %}
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Run Inventory Check
+
+        </button>
+
+    </form>
+
+</div>
+
+<br>
+
+<div class="card">
+
+    <h2>Reports & Queries</h2>
+
+    <br>
+
+    <a href="{% url 'purchase_details' %}"
+       class="btn">
+        Purchase Details
+    </a>
+
+    <a href="{% url 'stock_movement_report' %}"
+       class="btn">
+        Stock Movement
+    </a>
+
+</div>
+
+{% endblock %}
